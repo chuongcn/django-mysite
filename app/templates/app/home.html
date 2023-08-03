@@ -37,50 +37,19 @@
 
 {% block main-content %}
 <h2 class="row title">Sản phẩm nổi bật</h2>
-<div class="row">
+<div class="row" style="width:100%">
+    {% for product in products %}
   <div class="col-lg-3">
-    <img class="thumbnail" src="{%static 'app/images/hoa-khai-truong-3.jpg' %}" alt="">
+    <img class="thumbnail" src="{{product.ImageURL}}" alt="">
     <div class="box-element product">
-      <h6><strong>Hoa Khai Trương Hồng Đỏ</strong></h6>
+      <h6><strong>{{product.name}}</strong></h6>
       <hr>
       <button class="btn btn-outline-secondary add-btn">Mua hàng</button>
       <a href="#" class="btn btn-outline-warning">Chi tiết</a>
-      <h4 class="price">990.000đ</h4>
+      <h4 class="price">{{product.price | floatformat:0}}đ</h4>
     </div>
   </div>
-
-   <div class="col-lg-3">
-    <img class="thumbnail" src="{%static 'app/images/hoa-khai-truong-2.jpg' %}" alt="">
-    <div class="box-element product">
-      <h6><strong>Hoa Khai Trương Bội Thu</strong></h6>
-      <hr>
-      <button class="btn btn-outline-secondary add-btn">Mua hàng</button>
-      <a href="#" class="btn btn-outline-warning">Chi tiết</a>
-      <h4 class="price">450.000đ</h4>
-    </div>
-  </div>
-
-   <div class="col-lg-3">
-    <img class="thumbnail" src="{%static 'app/images/hoa-khai-truong-1.jpg' %}" alt="">
-    <div class="box-element product">
-      <h6><strong>Hoa Khai Trương Hồng Phát</strong></h6>
-      <hr>
-      <button class="btn btn-outline-secondary add-btn">Mua hàng</button>
-      <a href="#" class="btn btn-outline-warning">Chi tiết</a>
-      <h4 class="price">1.200.000đ</h4>
-    </div>
-  </div>
-
-   <div class="col-lg-3">
-    <img class="thumbnail" src="{%static 'app/images/hoa-khai-truong-3.jpg' %}" alt="">
-    <div class="box-element product">
-      <h6><strong>Hoa Khai Trương Hồng Đỏ</strong></h6>
-      <hr>
-      <button class="btn btn-outline-secondary add-btn">Mua hàng</button>
-      <a href="#" class="btn btn-outline-warning">Chi tiết</a>
-      <h4 class="price">990.000đ</h4>
-    </div>
-  </div>
+   {% endfor %}
 
 </div>
 
