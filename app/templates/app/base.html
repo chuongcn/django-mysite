@@ -15,8 +15,12 @@
     <script src="{%static 'app/js/all.min.js' %}"  crossorigin="anonymous"></script>
     <script src="{%static 'app/js/owl.carousel.min.js' %}"  crossorigin="anonymous"></script>
     <script src="{%static 'app/js/myscript.js' %}"  crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+    </script>
 
-    <title>Home</title>
+
+    <title>Home SheWhite</title>
 </head>
 <body>
 <!--HEADER-->
@@ -92,5 +96,6 @@
         Copyright 2023
     </footer>
 <!--end FOOTER-->
+    <script src="{%static 'app/js/mycart.js' %}"  crossorigin="anonymous"></script>
 </body>
 </html>
