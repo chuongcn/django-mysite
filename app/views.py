@@ -2,9 +2,20 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import *
 import json
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
-
+def register(request):
+    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {'form': form}
+    return render(request,'app/register.html',context)
+def login(request):
+    context = {}
+    return render(request,'app/login.html',context)
 def home(request):
     products = Product.objects.all()
     context = {'products': products}

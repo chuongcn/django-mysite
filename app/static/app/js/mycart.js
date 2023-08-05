@@ -18,6 +18,8 @@ function updateUserOrder(productId, action){
     console.log(user, 'is logged in ! Sending data ...')
 //    console.log('URL:', url)
     let url='/update_item/'
+    console.log(csrftoken)
+
     fetch(url,{
         method:'POST',
         headers: {
@@ -31,7 +33,7 @@ function updateUserOrder(productId, action){
     })
     .then((data) =>{
         console.log('data',data)
-        window.location.reload(true);
+        location.reload();
     })
 }
 
