@@ -38,13 +38,14 @@
 {% block main-content %}
 <h2 class="row title">Sản phẩm nổi bật</h2>
 <div class="row" style="width:100%">
+
     {% for product in products %}
   <div class="col-lg-3">
     <img class="thumbnail" src="{{product.ImageURL}}" alt="">
     <div class="box-element product">
       <h6><strong>{{product.name}}</strong></h6>
       <hr>
-      <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Mua hàng</button>
+      <button data-product={{product.id}} data-action='add' class="btn btn-outline-secondary add-btn update-cart">Mua hàng</button>
       <a href="#" class="btn btn-outline-warning">Chi tiết</a>
       <h4 class="price">{{product.price | floatformat:3}}đ</h4>
     </div>

@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
     <link href="{%static 'app/css/all.min.css' %}" rel="stylesheet" />
     <link href="{%static 'app/css/main.css' %}" rel="stylesheet" />
     <!-- js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"  crossorigin="anonymous"></script>
     <script src="{%static 'app/js/all.min.js' %}"  crossorigin="anonymous"></script>
@@ -17,8 +17,24 @@
     <script src="{%static 'app/js/myscript.js' %}"  crossorigin="anonymous"></script>
     <script type="text/javascript">
         var user = '{{request.user}}'
-    </script>
 
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    const csrftoken = getToken('csrftoken');
+    </script>
 
     <title>Home SheWhite</title>
 </head>
@@ -38,14 +54,18 @@
               <a class="nav-link active" aria-current="page" href="{%url 'home' %}">Trang chủ</a>
             </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sản phẩm
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Hoa Khai Trương</a></li>
-                <li><a class="dropdown-item" href="#">Hoa Sinh Nhật</a></li>
-              </ul>
+<!--            <li class="nav-item dropdown">-->
+<!--              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                Sản phẩm-->
+<!--              </a>-->
+<!--              <ul class="dropdown-menu">-->
+<!--                <li><a class="dropdown-item" href="#">Hoa Khai Trương</a></li>-->
+<!--                <li><a class="dropdown-item" href="#">Hoa Sinh Nhật</a></li>-->
+<!--              </ul>-->
+<!--            </li>-->
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sản phẩm</a>
             </li>
 
            <li class="nav-item">
@@ -96,6 +116,8 @@
         Copyright 2023
     </footer>
 <!--end FOOTER-->
+
     <script src="{%static 'app/js/mycart.js' %}"  crossorigin="anonymous"></script>
+
 </body>
 </html>
