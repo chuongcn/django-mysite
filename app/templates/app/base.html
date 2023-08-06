@@ -72,22 +72,18 @@
               <a class="nav-link" href="#">Liên hệ</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Nhập từ khóa cần tìm" aria-label="Search">
+          <form class="d-flex" role="search" method=POST action= "{% url 'search' %}">
+              {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Nhập từ khóa cần tìm" aria-label="Search" name="searched">
             <button class="btn btn-outline-warning" type="submit">Tìm</button>
           </form>
         </div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Admin
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Trang cá nhân</a></li>
-                <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
-                <li><a class="dropdown-item" href="#">Thoát</a></li>
-              </ul>
-            </li>
+            <div class="form-inline my-2 my-lg-0">
+                <span>Chào! {{request.user}}</span>
+                <span><a href="{% url 'logout' %} "> Thoát </a></span>
+            </div>
+
             <li class="nav-item">
               <a class="nav-link" href="{%url 'cart' %}">Giỏ hàng</a>
             </li>
@@ -109,6 +105,8 @@
     {% block cart-content %} {% endblock cart-content %}
         <!--Checkout-->
     {% block content-checkout %} {% endblock content-checkout %}
+        <!--    Register-->
+    {% block register %} {% endblock register %}
 <!-- end MAIN BODY -->
 
 <!--FOOTER-->

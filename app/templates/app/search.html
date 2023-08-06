@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends 'app/base.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm kiếm</title>
+</head>
+<body>
+
+{% block search %}
+    <h5>Kết quả tìm kiếm: {{searched}} </h5> <br/>
+    {% for key in keys %}
+      {{key}} <br/>
+    {% endfor %}
+
+{% endblock search %}
+</body>
+</html>
