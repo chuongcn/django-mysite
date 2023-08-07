@@ -8,6 +8,7 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username','email','first_name','last_name','password1','password2']
+
 # class Customer(models.Model):
 #     user = models.OneToOneField(User,on_delete=models.SET_NULL,null=True,blank=False)
 #     name = models.CharField(max_length=200,null=True)
@@ -20,6 +21,7 @@ class Product(models.Model):
     price = models.FloatField()
     image = models.ImageField(null=True,blank=True)
     # digital = models.BooleanField(default=False,null=True,blank=False)
+    detail = models.TextField(null=True,blank=True)
     def __str__(self):
         return self.name
     @property

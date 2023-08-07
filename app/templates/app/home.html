@@ -46,7 +46,7 @@
       <h6><strong>{{product.name}}</strong></h6>
       <hr>
        <button data-product={{product.id}} data-action='add' class="btn btn-outline-secondary add-btn update-cart">Mua hàng</button>
-      <a href="#" class="btn btn-outline-warning">Chi tiết</a>
+      <a href="{% url 'detail' %}?id={{product.id}}" class="btn btn-outline-warning">Chi tiết</a>
       <h4 class="price">{{product.price | floatformat:3}}đ</h4>
     </div>
   </div>
