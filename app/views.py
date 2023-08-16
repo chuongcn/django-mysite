@@ -5,13 +5,20 @@ import json
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def search(request):
     if request.method == "POST":
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains = searched)
-    return render(request, 'app/search.html', {"searched":searched, "keys":keys})
+        user_not_login = "hidden"
+        user_login = "show"
+    else:
+        user_not_login = "show"
+        user_login = "hidden"
+    return render(request, 'app/search.html', {'searched':searched, 'keys':keys,
+                                               'user_not_login':user_not_login,'user_login':user_login})
 def register(request):
     form = CreateUserForm()
     if request.method == "POST":
@@ -54,7 +61,7 @@ def home(request):
         user_login = "show"
     else:
         items = [],
-        order = {'get_cart_items':0, 'get_cart_total':0}
+        order = {'get_cart_items':0, 'get_cart_total':0, 'shipping':False}
         cartItems = order['get_cart_items']
         user_not_login = "show"
         user_login = "hidden"
@@ -72,7 +79,7 @@ def cart(request):
         user_login = "show"
     else:
         items = [],
-        order = {'get_cart_items':0, 'get_cart_total':0}
+        order = {'get_cart_items':0, 'get_cart_total':0, 'shipping':False}
         cartItems = order['get_cart_items']
         user_not_login = "show"
         user_login = "hidden"
@@ -90,7 +97,7 @@ def checkout(request):
         user_login = "show"
     else:
         items = [],
-        order = {'get_cart_items':0, 'get_cart_total':0}
+        order = {'get_cart_items':0, 'get_cart_total':0, 'shipping':False}
         cartItems = order['get_cart_items']
         user_not_login = "show"
         user_login = "hidden"
@@ -136,6 +143,19 @@ def detail(request):
     context = {'items':items, 'order':order,'cartItems':cartItems,'user_not_login':user_not_login,
                'user_login':user_login,'products':products}
     return render(request,'app/detail.html', context)
+
+
+
+
+@login_required
+def history(request):
+    customer = request.user
+    order = Order.objects.filter(customer=request.user,complete=True)
+    # orderItem, created = OrderItem.objects.get_or_create(order=order.transaction_id)
+    # orderItem = OrderItem.objects.get(order=order)
+    # items = order.orderitem_set.all()
+    context = {'order': order}
+    return render(request, 'historyOrder.html', context)
 
 
 

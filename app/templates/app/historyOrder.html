@@ -1,0 +1,58 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block history-content %}
+    <section class="h-100 gradient-custom">
+	  <div class="container py-5 h-100 mt-5" >
+		<div class="row d-flex justify-content-center align-items-center h-100 py-5 rounded-3" style="background:white">
+		  <div class="col-lg-10 col-xl-8">
+			<h2 class="text-center">Lịch sử đặt hàng</h2>
+			{% for order in order %}
+			<div class="card mt-5" style="border-radius: 10px;">
+			  <div class=" d-flex align-items-center card-header justify-content-between  px-4 py-5">
+				<h5 class="text-muted mb-0">Đơn hàng thứ <span style="color: #a8729a;">{{ forloop.counter }}</span></h5>
+				<h5 class="text-muted mb-0"><span style="color: #a8729a;">{{ order.date_order|date:"F j, Y"  }}</span></h5>
+			  </div>
+			  <div class="card-body p-4" style="max-height:400px;overflow-y:scroll;overflow-x:hidden">
+				{% for item in order.orderitem_set.all %}
+				<div class="p-1">
+					<div class="card shadow-0 border mb-4">
+					<div class="card-body">
+					  <div class="row">
+						<div class="col-md-2">
+						  <img src="{{item.product.image.url}}"
+							class="img-fluid" alt="Phone">
+						</div>
+						<div class="col-md-6 text-center d-flex justify-content-center align-items-center">
+						  <p class="text-muted mb-0">{{item.product.name}}</p>
+						</div>
+						<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+						  <p class="text-muted mb-0 small">x {{item.quantity}}</p>
+						</div>
+						<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+						  <p class="text-muted mb-0 small">{{item.product.price}} đ</p>
+						</div>
+					  </div>
+					  <!-- <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">-->
+					</div>
+				  </div>
+				</div>
+				{% endfor %}
+
+			  </div>
+			  <div class="card-footer border-0 py-3 bg-light"
+				style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+				<h5 class="d-flex align-items-center justify-content-start text-uppercase mb-0">
+				  Tổng giá:
+				  {{order.get_cart_total}} đ
+				</h5>
+			  </div>
+			</div>
+			{% endfor %}
+
+		  </div>
+		</div>
+	  </div>
+</section>
+
+
+{% endblock history-content %}

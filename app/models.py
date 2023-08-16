@@ -20,7 +20,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200,null=True)
     price = models.FloatField()
     image = models.ImageField(null=True,blank=True)
-    # digital = models.BooleanField(default=False,null=True,blank=False)
+    digital = models.BooleanField(default=False,null=True,blank=False)
     detail = models.TextField(null=True,blank=True)
     def __str__(self):
         return self.name
@@ -39,6 +39,16 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=200,null=True)
     def __str__(self):
         return str(self.id)
+
+    @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitems_set.all()
+        for i in orderitems:
+            if i.product.digital == False:
+                shipping = True
+        return shipping
+
     @property
     def get_cart_items(self):
         orderitems = self.orderitems_set.all()
